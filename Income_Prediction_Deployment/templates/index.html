@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>Search Page</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Predict the Income</h1>
+
+    <div class="form">
+        <p><b>Predict Single Income</b></p>
+        <form action="/predict" method="POST">
+            <input type="number" name="age" id="age" placeholder="age">
+
+            <select name="workclass" id="workclass">
+                <option value="Self-emp-not-inc">Self-emp-not-inc</option>
+                <option value="Private">Private</option>
+                <option value="State-gov">State-gov</option>
+                <option value="Federal-gov">Federal-gov</option>
+                <option value="Local-gov">Local-gov</option>
+                <option value="?">?</option>
+                <option value="Self-emp-inc">Self-emp-inc</option>
+                <option value="Without-pay">Without-pay</option>
+                <option value="Never-worked">Never-worked</option>
+            </select>
+
+            <input type="number" name="fnlwgt" id="fnlwgt" placeholder="fnlwgt">
+
+            <select name="education" id="education">
+                <option value="Bachelors">Bachelors</option>
+                <option value="HS-grad">HS-grad</option>
+                <option value="11th">11th</option>
+                <option value="Masters">Masters</option>
+                <option value="9th">9th</option>
+                <option value="Some-college">Some-college</option>
+                <option value="Assoc-acdm">Assoc-acdm</option>
+                <option value="Assoc-voc">Assoc-voc</option>
+                <option value="7th-8th">7th-8th</option>
+                <option value="Doctorate">Doctorate</option>
+                <option value="Prof-school">Prof-school</option>
+                <option value="5th-6th">5th-6th</option>
+                <option value="10th">10th</option>
+                <option value="1st-4th">1st-4th</option>
+                <option value="Preschool">Preschool</option>
+                <option value="12th">12th</option>
+            </select>
+
+            <input type="number" name="education_num" id="education_num" placeholder="education_num">
+
+            <select name="marital_status" id="marital_status">
+                <option value="Married-civ-spouse">Married-civ-spouse</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Married-spouse-absent">Married-spouse-absent</option>
+                <option value="Never-married">Never-married</option>
+                <option value="Separated">Separated</option>
+                <option value="Married-AF-spouse">Married-AF-spouse</option>
+                <option value="Widowed">Widowed</option>
+            </select>
+
+            <select name="occupation" id="occupation">
+                <option value="Exec-managerial">Exec-managerial</option>
+                <option value="Handlers-cleaners">Handlers-cleaners</option>
+                <option value="Prof-specialty">Prof-specialty</option>
+                <option value="Other-service">Other-service</option>
+                <option value="Adm-clerical">Adm-clerical</option>
+                <option value="Sales">Sales</option>
+                <option value="Craft-repair">Craft-repair</option>
+                <option value="Transport-moving">Transport-moving</option>
+                <option value="Farming-fishing">Farming-fishing</option>
+                <option value="Machine-op-inspct">Machine-op-inspct</option>
+                <option value="Tech-support">Tech-support</option>
+                <option value="?">?</option>
+                <option value="Protective-serv">Protective-serv</option>
+                <option value="Armed-Forces">Armed-Forces</option>
+                <option value="Priv-house-serv">Priv-house-serv</option>
+            </select>
+
+            <select name="relationship" id="relationship">
+                <option value="Husband">Husband</option>
+                <option value="Not-in-family">Not-in-family</option>
+                <option value="Wife">Wife</option>
+                <option value="Own-child">Own-child</option>
+                <option value="Unmarried">Unmarried</option>
+                <option value="Other-relative">Other-relative</option>
+            </select>
+
+            <select name="race" id="race">
+                <option value="White">White</option>
+                <option value="Black">Black</option>
+                <option value="Asian-Pac-Islander">Asian-Pac-Islander</option>
+                <option value="Amer-Indian-Eskimo">Amer-Indian-Eskimo</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <select name="sex" id="sex">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <input type="number" name="capital_gain" id="capital_gain" placeholder="capital_gain">
+            <input type="number" name="capital_loss" id="capital_loss" placeholder="capital_loss">
+            <input type="number" name="hours_per_week" id="hours_per_week"placeholder="hours_per_week">
+
+            <select name="native_country" id="native_country">
+                <option value="United-States">United-States</option>
+                <option value="Cuba">Cuba</option>
+                <option value="Jamaica">Jamaica</option>
+                <option value="India">India</option>
+                <option value="?">?</option>
+                <option value="Mexico">Mexico</option>
+                <option value="South">South</option>
+                <option value="Puerto-Rico">Puerto-Rico</option>
+                <option value="Honduras">Honduras</option>
+                <option value="England">England</option>
+                <option value="Canada">Canada</option>
+                <option value="Germany">Germany</option>
+                <option value="Iran">Iran</option>
+                <option value="Philippines">Philippines</option>
+                <option value="Italy">Italy</option>
+                <option value="Poland">Poland</option>
+                <option value="Columbia">Columbia</option>
+                <option value="Cambodia">Cambodia</option>
+                <option value="Thailand">Thailand</option>
+                <option value="Ecuador">Ecuador</option>
+                <option value="Laos">Laos</option>
+                <option value="Taiwan">Taiwan</option>
+                <option value="Haiti">Haiti</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Dominican-Republic">Dominican-Republic</option>
+                <option value="El-Salvador">El-Salvador</option>
+                <option value="France">France</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="China">China</option>
+                <option value="Yugoslavia">Yugoslavia</option>
+                <option value="Peru">Peru</option>
+                <option value="Outlying-US(Guam-USVI-etc)">Outlying-US(Guam-USVI-etc)</option>
+                <option value="Scotland">Scotland</option>
+                <option value="Trinadad&Tobago">Trinadad&Tobago</option>
+                <option value="Greece">Greece</option>
+                <option value="Nicaragua">Nicaragua</option>
+                <option value="Vietnam">Vietnam</option>
+                <option value="Hong">Hong</option>
+                <option value="Ireland">Ireland</option>
+                <option value="Hungary">Hungary</option>
+                <option value="Holand-Netherlands">Holand-Netherlands</option>
+            </select>
+
+            <input type="submit" value="Predict">
+        </form>
+    </div>
+
+    <div class="form">
+        <p><b>Predict Batch Income</b></p>
+        <form action="/predict_batch" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" id="batch_predict" placeholder="batch_predict">
+            <label for="email">Enter your email:</label>
+            <input type="email" id="email" name="email" placeholder="email">
+            <input type="submit" value="Batch Predict">
+        </form>
+    </div>
+
+</div>
+{% endblock %}

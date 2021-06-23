@@ -1,0 +1,39 @@
+@app.route('/predict_batch',methods=['POST','GET']) # route to show the predictions in a web UI
+@cross_origin()
+def predict_batch():
+
+    df=pd.read_csv(request.files.get("file"))
+    df = df.drop('Unnamed: 0', axis=1)
+    print(df.head(2))
+	prepped_df_object = data_prep(testing, 20)
+    categorical_feature_list = prepped_df_object.categorical_feature(df, 20)
+	
+	prepped_df_object.data_visualization(df,categorical_feature_list,cols=2, width=20, height=45, hspace=0.8, wspace=0.8)
+	
+	encoded_df = prepped_df_object.encoder(df)
+    encoded_df.head(2)
+	
+	prepped_df_object.data_visualization_groupby_target(encoded_df,categorical_feature_list,cols=2, width=20, height=45, hspace=0.8, wspace=0.8)
+	
+	X = encoded_df.drop('wage_class', axis=1)
+	
+	filename = 'xgboost_model.pickle'
+    loaded_model = pickle.load(open(filename, 'rb'))  # loading the model file from the storage
+	
+    # predictions using the loaded model file
+    prediction = loaded_model.predict(X)
+    
+	list_of_files = os.listdir()
+	
+	return render_template('results.html', prediction=f'We sent you ndf email with all the predictions in which the first five predictions are: {str(list(prediction[0:5]))}')
+     
+
+../static/full_figure_2.jpg
+
+../static/full_figure_1.jpg
+
+img {
+  border-radius: 10%;
+  height: 60px;
+  width: 60px;
+}
